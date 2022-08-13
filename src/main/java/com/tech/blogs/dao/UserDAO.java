@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
-import javax.mail.search.FromStringTerm;
-
 import com.tech.blogs.entities.User;
 import com.tech.blogs.helper.DBConnection;
 
@@ -78,7 +76,7 @@ public class UserDAO {
 				String aboutUser = rs.getString(6);
 				Timestamp regDate = rs.getTimestamp(7);
 				String usrProfile = rs.getString(8);
-				user=new User();
+				user = new User();
 				user.setId(userId);
 				user.setName(name);
 				user.setEmail(email1);
@@ -96,28 +94,57 @@ public class UserDAO {
 
 		return user;
 	}
-	
-	public boolean updateUser(User user)
-	{
+
+	public boolean updateUser(User user) {
 		boolean updateUserStatus = false;
 		try {
-			
+
 			String query = "update user set name=?,email=?,gender=?,about=?,profile=? where id=?";
-			PreparedStatement psmt  = connection.prepareStatement(query);
+			PreparedStatement psmt = connection.prepareStatement(query);
 			psmt.setString(1, user.getName());
 			psmt.setString(2, user.getEmail());
 			psmt.setString(3, user.getGender());
 			psmt.setString(4, user.getAbout());
 			psmt.setString(5, user.getProfilePic());
 			psmt.setInt(6, user.getId());
-			
+
 			int executeUpdate = psmt.executeUpdate();
-			updateUserStatus=true;
-			
+			updateUserStatus = true;
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return updateUserStatus;
 	}
 
+	public User getUser_ByUserID(int userId) {
+		User user = null;
+ 	try {
+
+			String query = "select * from user where id=?";
+
+			PreparedStatement psmt = connection.prepareStatement(query);
+			psmt.setInt(1, userId);
+			ResultSet rs = psmt.executeQuery();
+			while (rs.next()) {
+
+				int user_Id = rs.getInt(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				String password = rs.getString(4);
+				String gender = rs.getString(5);
+				String about = rs.getString(6);
+				String regDate = rs.getString(7);
+				String profilePic = rs.getString(8);
+
+				user = new User(user_Id, name, email, password, gender, about, null, profilePic);
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return user;
+	}
 }

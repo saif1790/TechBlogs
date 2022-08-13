@@ -13,8 +13,9 @@ public class User {
 	private String about="Hey there I am isng technical blogs";
 	private Timestamp dateTimestamp;
 	private String profilePic;
+	
 	public User(int id, String name, String email, String password, String gender, String about,
-			Timestamp dateTimestamp) {
+			Timestamp dateTimestamp, String profilePic) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -23,6 +24,7 @@ public class User {
 		this.gender = gender;
 		this.about = about;
 		this.dateTimestamp = dateTimestamp;
+		this.profilePic = profilePic;
 	}
 	public User() {
 		 

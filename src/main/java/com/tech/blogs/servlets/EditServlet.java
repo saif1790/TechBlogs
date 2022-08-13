@@ -66,8 +66,8 @@ public class EditServlet extends HttpServlet {
 		user.setEmail(email);
 		user.setGender(gender);
 		user.setAbout(about);
-		String oldPicPath =user.getProfilePic();
-		System.out.println("Old Path"+oldPicPath);
+		String oldPicPath = user.getProfilePic();
+		System.out.println("Old Path" + oldPicPath);
 		user.setProfilePic(picName);
 		UserDAO dao = new UserDAO(DBConnection.getDBConnection());
 		boolean updateUserStatus = dao.updateUser(user);
@@ -76,13 +76,14 @@ public class EditServlet extends HttpServlet {
 			String path = request.getRealPath("/") + "pics" + File.separator + user.getProfilePic();
 			String Oldpath = request.getRealPath("/") + "pics" + File.separator + oldPicPath;
 			System.out.println(path);
+			if(!oldPicPath.equals("default.png"))
 			FileHelper.deleteFile(Oldpath);
+			
 			if (FileHelper.saveFile(part.getInputStream(), path)) {
 
 				Message msg = new Message("Profile updated Successfully....", "success", "alert-success");
-				session = request.getSession();
 				session.setAttribute("msg", msg);
-				out.println("Profile updated");
+				response.sendRedirect("profile.jsp");
 			}
 		} else {
 			out.println("something went wrong");
