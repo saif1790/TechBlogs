@@ -109,7 +109,7 @@ public class PostDAO {
 List<Post> allPostList = new ArrayList<>();
 		
 		try {
-			String query = "select * from posts where category_Id=?";
+			String query = "select * from posts where category_Id=? order by post_Id desc";
 			
 			PreparedStatement pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, categoryId);

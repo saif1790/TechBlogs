@@ -134,10 +134,10 @@ public class UserDAO {
 				String password = rs.getString(4);
 				String gender = rs.getString(5);
 				String about = rs.getString(6);
-				String regDate = rs.getString(7);
+				Timestamp regDate = rs.getTimestamp(7);
 				String profilePic = rs.getString(8);
 
-				user = new User(user_Id, name, email, password, gender, about, null, profilePic);
+				user = new User(user_Id, name, email, password, gender, about, regDate, profilePic);
 
 			}
 
