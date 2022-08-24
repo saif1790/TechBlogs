@@ -111,8 +111,11 @@ List<Post> allPostList = new ArrayList<>();
 		try {
 			String query = "select * from posts where category_Id=? order by post_Id desc";
 			
+						
 			PreparedStatement pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, categoryId);
+			System.out.println(query);
+			
 			ResultSet rs = pstmt.executeQuery();
 		 
 			while (rs.next()) {
@@ -123,7 +126,7 @@ List<Post> allPostList = new ArrayList<>();
 				String postCode = rs.getString(4);
 				String postPic = rs.getString(5);
 				Timestamp postDate = rs.getTimestamp(6);
-				int userId = rs.getInt(7);
+				int userId = rs.getInt(8);
 				
 				Post post = new Post(postId, postTitle, postContent, postCode, postPic, postDate, categoryId, userId);
 				allPostList.add(post);

@@ -63,8 +63,9 @@ public class RegisterServlet extends HttpServlet {
 		 */
 
 		if (userAgreement == null) {
-			out.println("please accept term & condition");
-			out.println(userAgreement);
+			out.println("not checked");
+			System.out.println("please accept term & condition");
+			//out.println(userAgreement);
 		} else {
 
 			if (abouUser != "" && abouUser!=null) {
